@@ -106,7 +106,7 @@ public class GalleryFragment extends Fragment {
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Original photo.");
                 if (isRootTask()) {
-                    Intent intent = new Intent(getActivity(), FilterActivity.class);
+                    Intent intent = new Intent(getActivity(), LodingActivity.class);
                     intent.putExtra(getString(R.string.selected_image), mSelectedImage);
 
                     if (intent.hasExtra(getString(R.string.selected_image))) {
@@ -115,6 +115,7 @@ public class GalleryFragment extends Fragment {
                     } else if (intent.hasExtra(getString(R.string.selected_bitmap))) {
                         bitmap = (Bitmap) intent.getParcelableExtra(getString(R.string.selected_bitmap));
                         mFirebaseMethods.uploadOriginalPhoto(getString(R.string.new_photo), null, bitmap);
+
                     }
                     startActivity(intent);
 

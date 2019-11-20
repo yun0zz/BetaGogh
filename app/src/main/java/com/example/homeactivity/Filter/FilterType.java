@@ -15,6 +15,5 @@ public enum FilterType {
     STYLE11,
     STYLE12,
     STYLE13,
-    STYLE14,
-    STYLE15
+    STYLE14
 }

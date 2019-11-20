@@ -247,7 +247,6 @@ public class FirebaseMethods {
                             Log.d(TAG, "onSuccess 파이어베이스 Url: " + firebaseUrl );
 
                             Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
-
                         }
                     });
                 }

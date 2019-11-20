@@ -147,11 +147,13 @@ public class NextActivity extends AppCompatActivity {
             imgUrl = intent.getStringExtra(getString(R.string.selected_image));
             Log.d(TAG, "setImage: got new image url: " + imgUrl);
             UniversalImageLoader.setImage(imgUrl, image, null, mAppend);
+            Toast.makeText(this, "사진을 가져오는 중입니다.", Toast.LENGTH_SHORT).show();
         }
         else if (intent.hasExtra(getString(R.string.selected_bitmap))) {
             bitmap = (Bitmap) intent.getParcelableExtra(getString(R.string.selected_bitmap));
             Log.d(TAG, "setImage: got new bitmap");
             image.setImageBitmap(bitmap);
+            Toast.makeText(this, "사진을 가져오는 중입니다.", Toast.LENGTH_SHORT).show();
         }
 
     }

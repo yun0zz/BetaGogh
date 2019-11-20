@@ -34,7 +34,6 @@ public class FilterTypeHelper {
                 return R.color.filter_color_brown_light;
             case STYLE13:
             case STYLE14:
-            case STYLE15:
             default:
                 return R.color.filter_color_grey_light;
         }
@@ -72,8 +71,6 @@ public class FilterTypeHelper {
                 return R.drawable.filter_thumb_style13;
             case STYLE14:
                 return R.drawable.filter_thumb_style14;
-//            case STYLE15:
-//                return R.drawable.filter_thumb_style15;
             default:
                 return R.drawable.filter_thumb_original;
         }
@@ -111,8 +108,6 @@ public class FilterTypeHelper {
                 return R.string.filter_style13;
             case STYLE14:
                 return R.string.filter_style14;
-            case STYLE15:
-                return R.string.filter_style15;
             default:
                 return R.string.filter_none;
         }

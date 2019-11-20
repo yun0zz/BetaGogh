@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -36,6 +37,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.homeactivity.Home.HomeActivity;
 import com.example.homeactivity.Profile.AccountSettingsActivity;
 import com.example.homeactivity.R;
@@ -45,6 +47,7 @@ import com.example.homeactivity.Utils.BitmapUtils;
 import com.example.homeactivity.Utils.CommentListAdapter;
 import com.example.homeactivity.Utils.FirebaseMethods;
 import com.example.homeactivity.Utils.HttpClient;
+import com.example.homeactivity.Utils.UniversalImageLoader;
 import com.example.homeactivity.models.Param;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -118,6 +121,9 @@ public class FilterActivity extends AppCompatActivity {
     private ImageView mBackArrow;
     private Context mContext = FilterActivity.this;
 
+    //progressbar
+    private ProgressBar mProgressBar;
+
     /**
      * filter style
      */
@@ -136,8 +142,7 @@ public class FilterActivity extends AppCompatActivity {
             FilterType.STYLE11,
             FilterType.STYLE12,
             FilterType.STYLE13,
-            FilterType.STYLE14,
-            FilterType.STYLE15
+            FilterType.STYLE14
     };
     /***/
 
@@ -171,8 +176,9 @@ public class FilterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.filter_activity_main);
-        TextView next = findViewById(R.id.filter_next);
 
+        /** next 버튼 */
+        TextView next = findViewById(R.id.filter_next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,8 +188,6 @@ public class FilterActivity extends AppCompatActivity {
                 //최종 url
                 String final_image = Base_Url + "transfer/" + mAdapter.Filterid() + "/" + OriginalUrl;
                 intent.putExtra("selected_image", final_image);
-
-
 
                 startActivity(intent);
             }
@@ -202,6 +206,7 @@ public class FilterActivity extends AppCompatActivity {
         /** 미리보기 사진 */
 
         imageView = findViewById(R.id.image_preview);
+
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
@@ -213,7 +218,11 @@ public class FilterActivity extends AppCompatActivity {
 
         loadImage();
 
+        sendRegistReqWithRetrofit(0);
+
         initView();
+
+        Log.d(TAG, "5678");
     }
 
     private void initView() {
@@ -228,6 +237,7 @@ public class FilterActivity extends AppCompatActivity {
 
         mAdapter = new FilterAdapter(this, types);
         mFilterListView.setAdapter(mAdapter);
+
         mAdapter.setOnFilterChangeListener(onFilterChangeListener);
     }
 
@@ -429,11 +439,10 @@ public class FilterActivity extends AppCompatActivity {
     /**
      * 서버에서 결과 이미지 가져오기
      */
-    protected void sendRegistReqWithRetrofit(final int filter_id) {
-
+    public void sendRegistReqWithRetrofit(final int filter_id) {
             if (filter_id == 0) {
                 Glide.with(FilterActivity.this).load(OriginalUrl).centerCrop().into(imagePreview);
-            } else if (filter_id != 0) {
+            } else {
                 OkHttpClient okHttpClient = new OkHttpClient.Builder()
                         .connectTimeout(5, TimeUnit.MINUTES)
                         .readTimeout(5, TimeUnit.MINUTES)
@@ -452,18 +461,10 @@ public class FilterActivity extends AppCompatActivity {
 
                 /** imageview에 결과이미지 넣기 */
                 String result_url = Base_Url + "preview/" + filter_id + "/" + OriginalUrl;
+
                 Toast.makeText(getApplicationContext(), "인공지능이 그림을 그리고 있어요", Toast.LENGTH_LONG).show();
+                Glide.with(FilterActivity.this).load(result_url).diskCacheStrategy(DiskCacheStrategy.RESOURCE).centerCrop().into(imagePreview);
 
-                Glide.with(FilterActivity.this).load(result_url).centerCrop().into(imagePreview);
-
-//            OkHttpClient okHttpClient = new OkHttpClient();
-//
-//            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//            builder.connectTimeout(5, TimeUnit.MINUTES) // connect timeout
-//                    .writeTimeout(5, TimeUnit.MINUTES) // write timeout
-//                    .readTimeout(5, TimeUnit.MINUTES); // read timeout
-//
-//            okHttpClient = builder.build();
             }
 
     }

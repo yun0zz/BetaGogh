@@ -103,6 +103,7 @@ public class PhotoFragment extends Fragment {
                     Log.d(TAG, "onActivityResult: received new bitmap from camera: " + bitmap);
                     Intent intent = new Intent(getActivity(), FilterActivity.class);  // 사진 찍으면 filter activity로 이동
                     intent.putExtra(getString(R.string.selected_bitmap), bitmap);
+
                     startActivity(intent);
                     if (intent.hasExtra(getString(R.string.selected_image))) {        // Original upload.
                         imgUrl = intent.getStringExtra(getString(R.string.selected_image));
