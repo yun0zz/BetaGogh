@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/filter_root"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_width="100.0dip"
+    android:layout_height="120.0dip"
+    android:padding="5dip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="90.0dip">
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:scaleType="centerCrop"
+            android:layout_width="90.0dip"
+            android:layout_height="90.0dip"
+            android:src="@drawable/filter_thumb_original"  />
+        <FrameLayout
+            android:id="@+id/filter_thumb_selected"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <View
+                android:id="@+id/filter_thumb_selected_bg"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/filter_thumb_selected_icon"
+                android:layout_width="54.0dip"
+                android:layout_height="54.0dip"
+                android:src="@drawable/selector_filter_selected" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/filter_name"
+        android:textSize="15.0sp"
+        android:layout_width="fill_parent"
+        android:layout_height="25.0dip"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:text="@string/filter_none"/>
+</FrameLayout>
