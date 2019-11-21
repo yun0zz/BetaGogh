@@ -463,7 +463,8 @@ public class FilterActivity extends AppCompatActivity {
                 String result_url = Base_Url + "preview/" + filter_id + "/" + OriginalUrl;
 
                 Toast.makeText(getApplicationContext(), "인공지능이 그림을 그리고 있어요", Toast.LENGTH_LONG).show();
-                Glide.with(FilterActivity.this).load(result_url).diskCacheStrategy(DiskCacheStrategy.RESOURCE).centerCrop().into(imagePreview);
+                Glide.with(FilterActivity.this).load(result_url).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imagePreview);
+
 
             }
 

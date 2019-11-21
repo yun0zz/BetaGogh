@@ -28,7 +28,7 @@ public class LodingActivity extends Activity {
                 startActivity(intent);
                 finish();
             }
-        }, 3500);
+        }, 5500);
 
     }
 }

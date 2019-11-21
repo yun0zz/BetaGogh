@@ -429,9 +429,7 @@ public class ViewPostFragment extends Fragment {
         mCaption.setText(mPhoto.getCaption());
 
         if (mPhoto.getComments().size() > 0) {
-            int number = mPhoto.getComments().size();
-            number-=1;
-            mComments.setText("댓글 " + number + "개 모두 보기");
+            mComments.setText("댓글 " +  mPhoto.getComments().size() + "개 모두 보기");
         } else {
             mComments.setText("");
         }

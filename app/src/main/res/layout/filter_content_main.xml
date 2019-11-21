@@ -15,14 +15,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/image_preview"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image"
-        android:contentDescription="@string/app_name" >
-    </ImageView>
+
+        <ImageView
+            android:id="@+id/image_preview"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/image"></ImageView>
 
     </RelativeLayout>
 
